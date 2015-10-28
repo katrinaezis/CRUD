@@ -82,7 +82,7 @@ $(document).ready(function () {
 		var like = item.get('like');
 		var dislike = item.get('dislike');
 
-		ratingTotal += parseInt(star);
+		ratingTotal += parseInt(star); 
 
 		var div = $('<div class="jumbotron"></div>');
 		$('#showReviews').append(div);
