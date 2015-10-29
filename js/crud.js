@@ -1,14 +1,17 @@
-$(document).ready(function () {
-	var query;
-	// var reviewTotal;
-	// var ratingTotal;
 
+$(document).ready(function () {
+	// Initialize global query variable and two
+	// counter variables
+	var query;
+	var reviewTotal;
+	var ratingTotal;
+
+	// Initialize parse and create a Review object
 	Parse.initialize("99KS1v8tzXN49YqcHHTLMyQOIMKSp4EMy9xlChYH", "ckTFvxlJ6j6ICZK5oh6TA2hYpJM3Pqhs8IQ6laOh");
 	var Review = Parse.Object.extend('Review');
 	$('#star').raty({'path': '/raty/lib/images' });
-	
 
-
+	// When the form is submited it updates the reviews
 	$('form').submit(function() {
 		var review = new Review();
 
@@ -17,8 +20,8 @@ $(document).ready(function () {
 		review.set('like', 0);
 		review.set('dislike', 0);
 
-		// For each of the form inputs it takes the
-		// user input and sets them to parse values
+		// Finds each input in the form and sends the
+		// data to parse, then clears out the input field
 		$(this).find('input').each(function() {
 			review.set($(this).attr('id'), $(this).val());
 			$(this).val('');
@@ -36,11 +39,19 @@ $(document).ready(function () {
 		return false;
 	});
 
+	// We get the data back from parse
+	// Must make sure that there is a title
+	// and a review. Also want to display the
+	// data based on when it was created by
+	// with the new reviews on top and the older
+	// reviews lower down
 	var getData = function() {
 		query = new Parse.Query(Review);
 		query.notEqualTo('title', '');
 		query.notEqualTo('review', '');
 		query.descending('createdAt');
+		// When it finds data that matches our
+		// query it calls buildList
 		query.find({
 			success:function(results) {
 				buildList(results);
@@ -48,24 +59,25 @@ $(document).ready(function () {
 		});
 	}
 
-	var reviewTotal;
-	var ratingTotal;
+	// Sets our counter variables to zero
+	// and then begins displaying all of our
+	// reviews
 	var buildList = function(data) {
-		var reviewTotal = 0;
-		var ratingTotal = 0;
+		reviewTotal = 0;
+		ratingTotal = 0;
 
 		$('#showReviews').empty();
 		data.forEach(function(d) {
 			reviewTotal++;
-			console.log(reviewTotal);
 			addItem(d);
 		});
 
-		var aveRate = reviewTotal/ratingTotal;
+		var aveRate = ratingTotal/reviewTotal;
 		console.log(reviewTotal);
 		console.log(ratingTotal);
 		console.log(aveRate);
-		$('#averating').raty({
+
+		$('#aveRating').raty({
 			path: "/raty/lib/images",
 			readOnly: true,
 			score: aveRate
@@ -75,32 +87,25 @@ $(document).ready(function () {
 	
 	var addItem = function(item) {
 		var star = item.get('star');
+		console.log(star);
 		var title = item.get('title');
 		var review = item.get('review');
 		var date = item.get('createdAt');
-		date = String(date).substring(0, 15);
+		date = String(date).substring(4, 15);
 		var like = item.get('like');
 		var dislike = item.get('dislike');
 
-		ratingTotal += parseInt(star); 
+		ratingTotal += parseInt(star);
+		console.log(ratingTotal);
+
+		// if (parseInt(star) > -1) {
+		// 	ratingTotal += star;
+		// 	console.log(ratingTotal);
+		// }
 
 		var div = $('<div class="jumbotron"></div>');
 		$('#showReviews').append(div);
-		$('div:last').raty({
-			path: "/raty/lib/images",
-			readOnly: true,
-			score: star
-		});
 
-		var del = $("<button class='btn btn-xs'><span class='glyphicon glyphicon-remove'></span></button>");
-		del.click(function() {
-			item.destroy({
-				success:getData
-			});
-		});
-		div.append(del);
-
-		//create and append thumb down button 
 		var liked = $('<i id="liked" class="liked fa fa-thumbs-o-up"></i>');
 		liked.click(function(){
 			query.get(item.id, {
@@ -112,7 +117,6 @@ $(document).ready(function () {
 				}
 			});
 		});
-		div.append(liked);
 
 		var disliked = $('<i id="disliked" class="liked fa fa-thumbs-o-down"></i>');
 		disliked.click(function(){
@@ -125,33 +129,47 @@ $(document).ready(function () {
 				}
 			})
 		});
-		div.append(disliked);
 
-		//create and append thumb up button
+		var del = $("<button id='del' class='btn btn-xs pull-right'><span class='glyphicon glyphicon-remove'></span></button>");
+		del.click(function() {
+			item.destroy({
+				success:getData
+			});
+		});
 
-		//create title portion of reviews
 		var reviewHead = $('<h2></h2>');
 		reviewHead.text(title);
-		div.append(reviewHead);
 
-		var reviewBody = $('<div></div>');
+		var reviewBody = $('<h4></h4>');
 		reviewBody.text(review);
-		div.append(reviewBody);
 
-		//stats about how many foudn it useful
-		//var stats = $('<div>' + dislike + '</div>');
-		//if else
+		
 		var stats = $('<div></div>');
 		if (like == 0 && dislike == 0) {
-			stats.text("bitch");
+			stats.text("This review has received no feedback.");
 		} else {
-			stats.text(like + " out of " + (like + dislike) + " are bitches");
+			stats.text(like + " out of " + (like + dislike) + "people agree");
 		}
-		div.append(stats);
 
 		var dates = $('<div></div>');
 		dates.text("posted on: " + date);
-		div.append(dates);
+
+		appendTo(div, del);
+		appendTo(div, reviewHead);
+		$('div:last').raty({
+			path: "/raty/lib/images",
+		 	readOnly: true,
+			score: star
+		});
+		appendTo(div, liked);
+		appendTo(div, disliked);
+		appendTo(div, reviewBody);
+		appendTo(div, stats);
+		appendTo(div, dates);
+	}
+
+	var appendTo = function(div, value) {
+		div.append(value);
 	}
 
 	getData();
