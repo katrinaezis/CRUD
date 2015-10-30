@@ -34,6 +34,10 @@
 			<div id="blur">
 				<div id="chosen">
 					<img id="pick" src="image/hipster.png">
+					<div id="average">
+					<h3>Average Rating: <span id="aveRating"></span></h3>
+					<h6>Too cool for a description</h6>
+				</div>
 				</div>
 				<div id="choose">
 					<?php
@@ -43,29 +47,31 @@
 						}
 					?>
 				</div>
-				<div id="average">
-					<h3>Average Rating: <span id="aveRating"></span></h3>
-					<h6>Hipsters are cool</h6>
-				</div>
 			</div>
 		</div>
-		<div id="enterReview">
-			<h2>Write a Review!</h2>
-			<form class="container">
-				<!-- 
-					stars
-					title for review
-					review
-					save -->
-				<div id="star"></div>
-				<input class="form-control" id="title" placeholder="enter a short title for your review"></input>
-				<input class="form-control" id="review" placeholder="write your review here before it gets cool"></input>
-				<button class="btn btn-primary" type="submit">Submit</button>
-			</form>
-		</div>
-		<div id="showReviews" class="container">
-			<!-- 
-				show all previous reviews -->
+		<div id="hide">
+			<div id="enterReview">
+				<h2>Write a Review!</h2>
+				<form class="container">
+					<!-- 
+						stars
+						title for review
+						review
+						save -->
+					<div id="star"></div>
+					<input class="form-control" id="title" placeholder="enter a short title for your review"></input>
+					<input class="form-control" id="review" type="text" placeholder="write your review here before it gets cool"></input>
+					<button id="submitBtn" class="btn" type="submit">Submit</button>
+				</form>
+			</div>
+			<hr />
+			<div id="pastReviews" class="container">
+				<h2 class="text-center">Past Reviews</h2>
+				<div id="showReviews" class="container">
+					<!-- 
+						show all previous reviews -->
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

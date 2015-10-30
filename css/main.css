@@ -1,6 +1,47 @@
 #enterReview, .liked {
-	padding: 5%;
-	font-weight: 300px;
+	padding: 1%;
+}
+
+#average {
+	color: white;
+}
+
+.jumbotron {
+	width: 100%;
+	background-color: #79a3d6; 
+}
+
+#enterReview {
+	width: 80%;
+	margin: auto;
+	color: #79a3d6;
+}
+
+.form-control {
+	margin: 2%;
+	margin-left: 0px;
+	color: #79a3d6;
+}
+
+#pastReviews > h2 {
+	color: rgb(240, 101, 101);
+}
+
+#showReviews > .jumbotron {
+	width: 100%;
+}
+
+#submitBtn {
+	background-color: #79a3d6;
+	color: white;
+}
+
+#submitBtn:hover {
+	background-color: rgb(240, 101, 101);
+}
+
+#showReviews {
+	color: white;
 }
 
 #del {
@@ -20,6 +61,10 @@
 #pick {
 	height: 400px;
 	margin: 5%;
+}
+
+hr {
+	width: 90%;
 }
 
 #header {
