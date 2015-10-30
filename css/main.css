@@ -1,14 +1,36 @@
-#enterReview, .liked {
-	padding: 1%;
-}
-
+/* 
+	Katrina Ezis
+	Info 343
+	Homework 4
+	CRUD Challenge
+*/
 #average {
 	color: white;
 }
 
-.jumbotron {
+#blur {
+	margin: 0px;
+	height: 100%;
 	width: 100%;
-	background-color: #79a3d6; 
+	background-color: rgba(102, 127, 153, 0.63);
+}
+
+#choose > img {
+	max-height: 150px;
+	margin: 2%;
+}
+
+#choose > img:hover {
+	max-height: 200px;
+	margin: 0%;
+}
+
+#del {
+	background-color: transparent;
+}
+
+#enterReview, .liked {
+	padding: 1%;
 }
 
 #enterReview {
@@ -23,8 +45,27 @@
 	color: #79a3d6;
 }
 
+#header {
+	width: 100%;
+	background-image: url('../image/background.jpg');
+}
+
+hr {
+	width: 90%;
+}
+
+.jumbotron {
+	width: 100%;
+	background-color: #79a3d6; 
+}
+
 #pastReviews > h2 {
 	color: rgb(240, 101, 101);
+}
+
+#pick {
+	height: 400px;
+	margin: 5%;
 }
 
 #showReviews > .jumbotron {
@@ -42,39 +83,4 @@
 
 #showReviews {
 	color: white;
-}
-
-#del {
-	background-color: transparent;
-}
-
-#choose > img {
-	max-height: 150px;
-	margin: 2%;
-}
-
-#choose > img:hover {
-	max-height: 200px;
-	margin: 0%;
-}
-
-#pick {
-	height: 400px;
-	margin: 5%;
-}
-
-hr {
-	width: 90%;
-}
-
-#header {
-	width: 100%;
-	background-image: url('../image/background.jpg');
-}
-
-#blur {
-	margin: 0px;
-	height: 100%;
-	width: 100%;
-	background-color: rgba(102, 127, 153, 0.63);
 }

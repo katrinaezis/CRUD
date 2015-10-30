@@ -1,6 +1,9 @@
 <?php
 	/* 
 	Katrina Ezis
+	Info 343
+	Homework 4
+	CRUD Challenge
 	*/
 ?>
 
@@ -40,6 +43,7 @@
 				</div>
 				</div>
 				<div id="choose">
+					<!-- Simple php to take in a file of hipster pictures and display them -->
 					<?php
 						$files = glob('hipsters/*.jpg');
 						foreach($files as $file) {
