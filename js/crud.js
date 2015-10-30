@@ -88,8 +88,19 @@ $(document).ready(function () {
 	// and then begins displaying all of our
 	// reviews
 	var buildList = function(data) {
+		// These will keep track of 
+		// how many total reviews there
+		// are and the total numbers of stars
 		reviewTotal = 0;
 		ratingTotal = 0;
+
+		// This will hide the past reviews header
+		// if there are no reviews to show
+		if (data.length == 0) {
+			$('#pastReviews').hide();
+		} else {
+			$('#pastReviews').show();
+		}
 
 		$('#showReviews').empty();
 		data.forEach(function(d) {
@@ -108,7 +119,6 @@ $(document).ready(function () {
 	// adds them to the page	
 	var addItem = function(item) {
 		var star = item.get('star');
-		console.log(star);
 		var title = item.get('title');
 		var review = item.get('review');
 		var date = item.get('createdAt');

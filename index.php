@@ -13,8 +13,8 @@
 		<meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <title>CRUD</title>
-	    <!-- <link rel="icon" type="image/png" href="img/car.png" /> -->
+	    <title>Review a Hipster</title>
+	    <link rel="icon" type="image/png" href="image/logo.png" />
 
 	    <!-- jQuery, Bootstrap, Font Awesome -->
 	    <script src="https://code.jquery.com/jquery.min.js"></script>
