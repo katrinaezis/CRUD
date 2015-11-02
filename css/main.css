@@ -48,6 +48,7 @@
 #header {
 	width: 100%;
 	background-image: url('../image/background.jpg');
+	background-size: cover;
 }
 
 hr {
